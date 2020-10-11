@@ -1,1 +1,1 @@
-# zigzag-thexam
+# zigzag take-home exam repository
