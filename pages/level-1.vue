@@ -59,7 +59,6 @@
                 else {
                     this.output = 'Invalid string'
                 }
-                return
             }
         }
     }

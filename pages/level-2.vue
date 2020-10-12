@@ -38,8 +38,7 @@
             return {
                 inputStr: '',
                 output: 'no output...',
-                isOutput: false,
-                pArray: []
+                isOutput: false
             }
         },
         methods: {
@@ -68,7 +67,6 @@
                 else {
                     this.output = 'invalid input'
                 }
-                return
             },
 
             expandAroundCenter(str, center1, center2) {

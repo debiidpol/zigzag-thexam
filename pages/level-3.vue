@@ -14,7 +14,7 @@
                 <p>2 // noon | abba | d</p>
             </div>
         </div>
-        <!-- <div class='div-input'>
+        <div class='div-input'>
             <div class='input-text'>
                 <label for='form1'>Input String:</label>
                 <div id='input-text-btn'>
@@ -28,7 +28,7 @@
                 <label for='form1'>Output String:</label>
                 <p v-if='isOutput'>{{output}}</p>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -42,23 +42,57 @@
             }
         },
         methods: {
-            // isPalindrome(str) {
-            //     this.isOutput = true;
-            //     if (str.length > 0) {
-            //         let midLen = Math.floor(str.length / 2)
-            //         for (let i = 0; i < midLen; i++) {
-            //             if (str[i] !== str[str.length - i - 1]) {
-            //                 this.output = false
-            //                 return
-            //             }
-            //         }
-            //         this.output = true
-            //     }
-            //     else {
-            //         this.output = 'Invalid string'
-            //     }
-            //     return
-            // }
+            isPalindrome(str) {
+                this.isOutput = true;
+                let len = str.length;
+
+                // initialize 2d array to hold boolean values if substrings are palindrome
+                let pArray = new Array(len);
+                for (let i = 0; i < len; i++) {
+                    pArray[i] = new Array(len);
+                }
+
+                // strings of length 1 are always palindromes
+                for (let i = 0; i < len; i++) {
+                    pArray[i][i] = true;
+                }
+
+                // checking if strings of length 2 are palindromes
+                for (let i = 0; i < len-1; i++) {
+                    if (str.charAt(i) == str.charAt(i+1)) {
+                        pArray[i][i+1] = true;
+                    }
+                }
+
+                //identifying if strings of length >= 3 are palindromes
+                for (let i = 3; i <= len; i++) {
+                    for (let j = 0; j < (len - i + 1); j++) { // traversing by length
+                        let k = j+i-1;
+                        if (str.charAt(j) == str.charAt(k) && pArray[j+1][k-1]) {
+                            pArray[j][k] = true;
+                        }
+                    }
+                }
+
+                // array to hold minimum cuts for length substrings
+                let pCuts = new Array(len);
+                for (let i = 0; i < len; i++) {
+                    let maxCut = 99999;
+                    if (pArray[0][i]) {
+                        pCuts[i] = 0;
+                    }
+                    else {
+                        for (let j = 0; j < i; j++) {
+                            if (pArray[j+1][i] && maxCut > pCuts[j] + 1) {
+                                maxCut = pCuts[j] + 1
+                            }
+                        }
+                        pCuts[i] = maxCut;
+                    }
+                }
+
+                this.output = pCuts[len-1];
+            }
         }
     }
 </script>
