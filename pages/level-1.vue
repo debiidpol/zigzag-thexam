@@ -44,6 +44,8 @@
         methods: {
             isPalindrome(str) {
                 this.isOutput = true;
+                str = str.toLowerCase();
+                str = str.replace(' ', '');
                 if (str.length > 0) {
                     let midLen = Math.floor(str.length / 2)
                     for (let i = 0; i < midLen; i++) {
@@ -58,10 +60,6 @@
                     this.output = 'Invalid string'
                 }
                 return
-            },
-            doOnFocus(ins) {
-                ins.value = '';
-                this.isOutput = false;
             }
         }
     }
