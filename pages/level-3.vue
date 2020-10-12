@@ -29,6 +29,12 @@
                 <p v-if='isOutput'>{{output}}</p>
             </div>
         </div>
+        <div class='div-docu'>
+            <a class='docu-header' @click.stop.prevent='readMore()'>Read Technical Discussion</a>
+            <div v-if='showDocu'>
+                <p>Time Complexity: O(n^2)<br>Space Complexity: O(n^2)</p>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -38,7 +44,8 @@
             return {
                 inputStr: '',
                 output: 'no output...',
-                isOutput: false
+                isOutput: false,
+                showDocu: false
             }
         },
         methods: {
@@ -92,6 +99,9 @@
                 }
 
                 this.output = pCuts[len-1];
+            },
+            readMore() {
+                this.showDocu = !this.showDocu;
             }
         }
     }
@@ -166,5 +176,9 @@
 .button:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+.div-docu {
+    margin-top: 10vh;
 }
 </style>
