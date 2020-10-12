@@ -42,27 +42,23 @@
             }
         },
         methods: {
-            isPalindrome(str) {
-                this.isOutput = true;
-                if (str.length > 0) {
-                    let midLen = Math.floor(str.length / 2)
-                    for (let i = 0; i < midLen; i++) {
-                        if (str[i] !== str[str.length - i - 1]) {
-                            this.output = false
-                            return
-                        }
-                    }
-                    this.output = true
-                }
-                else {
-                    this.output = 'Invalid string'
-                }
-                return
-            },
-            doOnFocus(ins) {
-                ins.value = '';
-                this.isOutput = false;
-            }
+            // isPalindrome(str) {
+            //     this.isOutput = true;
+            //     if (str.length > 0) {
+            //         let midLen = Math.floor(str.length / 2)
+            //         for (let i = 0; i < midLen; i++) {
+            //             if (str[i] !== str[str.length - i - 1]) {
+            //                 this.output = false
+            //                 return
+            //             }
+            //         }
+            //         this.output = true
+            //     }
+            //     else {
+            //         this.output = 'Invalid string'
+            //     }
+            //     return
+            // }
         }
     }
 </script>

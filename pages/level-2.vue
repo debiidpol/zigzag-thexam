@@ -14,7 +14,7 @@
                 <p>"xyzzyx"</p>
             </div>
         </div>
-        <!-- <div class='div-input'>
+        <div class='div-input'>
             <div class='input-text'>
                 <label for='form1'>Input String:</label>
                 <div id='input-text-btn'>
@@ -28,7 +28,7 @@
                 <label for='form1'>Output String:</label>
                 <p v-if='isOutput'>{{output}}</p>
             </div>
-        </div> -->
+        </div>
     </div>
 </template>
 
@@ -38,30 +38,48 @@
             return {
                 inputStr: '',
                 output: 'no output...',
-                isOutput: false
+                isOutput: false,
+                pArray: []
             }
         },
         methods: {
             isPalindrome(str) {
                 this.isOutput = true;
-                if (str.length > 0) {
-                    let midLen = Math.floor(str.length / 2)
-                    for (let i = 0; i < midLen; i++) {
-                        if (str[i] !== str[str.length - i - 1]) {
-                            this.output = false
-                            return
+                str = str.toLowerCase();
+                str = str.replace(' ', '');
+                let len = str.length;
+
+                if (len > 0) {
+                    let startIndex = 0;
+                    let endIndex = 0;
+
+                    for (let i = 0; i < len; i++) {
+                        let lengthAtOdd = this.expandAroundCenter(str, i, i);
+                        let lengthAtEven = this.expandAroundCenter(str, i, i+1);
+                        let longerLength = Math.max(lengthAtEven, lengthAtOdd);
+
+                        if (longerLength > endIndex - startIndex) {
+                            startIndex = i - Math.floor((longerLength-1)/2);
+                            endIndex = i + Math.floor(longerLength/2)
                         }
                     }
-                    this.output = true
+                    this.output = str.substring(startIndex, endIndex+1)
                 }
                 else {
-                    this.output = 'Invalid string'
+                    this.output = 'invalid input'
                 }
                 return
             },
-            doOnFocus(ins) {
-                ins.value = '';
-                this.isOutput = false;
+
+            expandAroundCenter(str, center1, center2) {
+                let L = center1
+                let R = center2
+
+                while (L >= 0 && R < str.length && str.charAt(L) === str.charAt(R)) {
+                    L--;
+                    R++;
+                }
+                return R - L - 1;
             }
         }
     }
