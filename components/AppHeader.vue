@@ -18,6 +18,7 @@
 <style>
 .header_style {
     background-color: #252525;
+    width: 100%;
     height: auto;
     padding-left: 2vw;
     padding-right: 2vw;
