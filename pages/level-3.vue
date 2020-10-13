@@ -76,13 +76,16 @@
             return {
                 inputStr: '',
                 output: 'no output...',
-                isOutput: false,
-                showDocu: false
+                isOutput: false,    // boolean to signal if the output needs to be shown already
+                showDocu: false     // boolean to signal if showing the documentation part is triggered
             }
         },
         methods: {
+            // function to tell whether the given string parameter is a palindrome or not using dynamic programming
             isPalindrome(str) {
                 this.isOutput = true;
+                str = str.toLowerCase(); // make sure that characters are all in lower case
+                str = str.replace(' ', ''); // removes whitespaces, if any
                 let len = str.length;
 
                 // initialize 2d array to hold boolean values if substrings are palindrome
@@ -107,6 +110,7 @@
                 for (let i = 3; i <= len; i++) {
                     for (let j = 0; j < (len - i + 1); j++) { // traversing by length
                         let k = j+i-1;
+                        // check end-to-end characters if equal and then check from the lookup table whether the middle substring is palindrome
                         if (str.charAt(j) == str.charAt(k) && pArray[j+1][k-1]) {
                             pArray[j][k] = true;
                         }
@@ -116,12 +120,14 @@
                 // array to hold minimum cuts for length substrings
                 let pCuts = new Array(len);
                 for (let i = 0; i < len; i++) {
-                    let maxCut = 99999;
-                    if (pArray[0][i]) {
+                    let maxCut = 99999; // sets holder of max value to determine the current min value
+
+                    if (pArray[0][i]) { // if the current substring is already palindrome, then there's no need to cut it
                         pCuts[i] = 0;
                     }
                     else {
                         for (let j = 0; j < i; j++) {
+                            // checks whether the right substring from the cut is a palindrome and if the current max value still has the greater value
                             if (pArray[j+1][i] && maxCut > pCuts[j] + 1) {
                                 maxCut = pCuts[j] + 1
                             }
@@ -130,9 +136,10 @@
                     }
                 }
 
-                this.output = pCuts[len-1];
+                this.output = pCuts[len-1]; // value at the end of the character string is the minimum number of cuts
             },
 
+            // function to trigger showing the documentation div; on and off
             readMore() {
                 this.showDocu = !this.showDocu;
             }

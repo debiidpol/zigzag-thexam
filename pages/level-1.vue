@@ -58,17 +58,25 @@
     export default {
         data: function() {
             return {
-                inputStr: '',
+                inputStr: '',   
                 output: 'no output...',
-                isOutput: false,
-                showDocu: false
+                isOutput: false,    // boolean to signal if the output needs to be shown already
+                showDocu: false     // boolean to signal if showing the documentation part is triggered
             }
         },
         methods: {
+            // function to tell whether the given string parameter is a palindrome or not
             isPalindrome(str) {
                 this.isOutput = true;
-                str = str.toLowerCase();
-                str = str.replace(' ', '');
+                str = str.toLowerCase(); // make sure that characters are all in lower case
+                str = str.replace(' ', ''); // removes whitespaces, if any
+
+                /*
+                    Bruteforce implementation of determining whether a non-empty string is palindrome or not.
+                    > iterates through the string characters
+                    > compares end-to-end characters if equal until it reaches the middle index
+                    > if all equal, then it's a plindrome; otherwise, it's not
+                */
                 if (str.length > 0) {
                     let midLen = Math.floor(str.length / 2)
                     for (let i = 0; i < midLen; i++) {
@@ -84,6 +92,7 @@
                 }
             },
 
+            // function to trigger showing the documentation div; on and off
             readMore() {
                 this.showDocu = !this.showDocu;
             }

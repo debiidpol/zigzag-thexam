@@ -66,17 +66,25 @@
             return {
                 inputStr: '',
                 output: 'no output...',
-                isOutput: false,
-                showDocu: false
+                isOutput: false,    // boolean to signal if the output needs to be shown already
+                showDocu: false     // boolean to signal if showing the documentation part is triggered
             }
         },
         methods: {
+            // function to tell whether the given string parameter is a palindrome or not
             isPalindrome(str) {
                 this.isOutput = true;
-                str = str.toLowerCase();
-                str = str.replace(' ', '');
+                str = str.toLowerCase(); // make sure that characters are all in lower case
+                str = str.replace(' ', ''); // removes whitespaces, if any
                 let len = str.length;
 
+                /*
+                    Expanding from middle implementation of determining whether a non-empty string is palindrome or not.
+                    > iterates through the string characters
+                    > expand from left to right of the center index until valid (0...length and S[left] === S[right])
+                    > save the length of the longest palindrome substring as endIndex
+                    > updates new start and end index depending on the longest palindrome substring founf
+                */
                 if (len > 0) {
                     let startIndex = 0;
                     let endIndex = 0;
@@ -98,17 +106,21 @@
                 }
             },
 
+            // function that expands the palindrome substring search from left and right of the center index
             expandAroundCenter(str, center1, center2) {
                 let L = center1
                 let R = center2
 
+                // validity of expansion
                 while (L >= 0 && R < str.length && str.charAt(L) === str.charAt(R)) {
                     L--;
                     R++;
                 }
-                return R - L - 1;
+
+                return R - L - 1; // returns the length of the palindrome subsrting found
             },
 
+            // function to trigger showing the documentation div; on and off
             readMore() {
                 this.showDocu = !this.showDocu;
             }
