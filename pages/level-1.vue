@@ -32,7 +32,23 @@
         <div class='div-docu'>
             <a class='docu-header' @click.stop.prevent='readMore()'>Read Technical Discussion</a>
             <div v-if='showDocu'>
-                <p>Time Complexity: O(n)<br>Space Complexity: O(n)</p>
+                <p><br><b>Time Complexity: O(n)</b><br><b>Space Complexity: O(1)</b></p>
+                <p>
+                    Since a <b>palindrome</b> is a non-empty string that reads the same as backwards and forwards, characters are mirrored at the middle. <br>
+                    Also, note that a string of length 1 is always a palindrome. <br><br>
+
+                    <b>Algorithm used:</b> <br>
+                    Given a string S[i..j] <br>
+                    (1) traverse the string from index 0 down to its length <br>
+                    (2) compare the characters from left and from right, meeting halfway (S[i] and S[j], S[i+1] and S[j-1], and so on) <br>
+                    (3) a single instance of non-similar character comparison means that the string is not a palindrome <br>
+                    (4) otherwise, the string is a palindrome. <br><br>
+
+                    <b>Time and Space Complexity</b> <br>
+                    The time complexity is at <b>O(n)</b> since there is technically n number of character comparisons done. <br>
+                    The space complexity, on the other hand, is at <b>O(1)</b> since the character comparisons only take up a constant space.<br><br>
+                    
+                </p>
             </div>
         </div>
     </div>

@@ -8,11 +8,6 @@
       >
         <b-card-text> {{level.description}} </b-card-text>
 
-        <!-- <button class='button' @click=''>
-          <span>
-            Run
-          </span>
-        </button> -->
         <nuxt-link :to='`${level.link}`'>
           <button class='button'>
             <span>
@@ -72,8 +67,6 @@ export default {
   border: none;
   color: #FFFFFF;
   text-align: center;
-  /* font-size: 28px; */
-  /* padding: 3vw; */
   width: 10vw;
   height: auto;
   transition: all 0.5s;

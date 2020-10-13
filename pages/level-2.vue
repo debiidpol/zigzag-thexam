@@ -32,7 +32,29 @@
         <div class='div-docu'>
             <a class='docu-header' @click.stop.prevent='readMore()'>Read Technical Discussion</a>
             <div v-if='showDocu'>
-                <p>Time Complexity: O(n^2)<br>Space Complexity: O(1)</p>
+                <p><br><b>Time Complexity: O(n^2)</b><br><b>Space Complexity: O(1)</b></p>
+                <p>
+                    Since a <b>palindrome</b> is a non-empty string that reads the same as backwards and forwards, characters are mirrored at the middle. <br>
+                    Also, note that a string of length 1 is always a palindrome. <br><br>
+
+                    <b>Algorithm used:</b> <br>
+                    Given a string S[i..j] <br>
+                    (1) traverse the string from index 0 down to its length <br>
+                    (2) at every character S[i], we run a looping method(String, int, int): <br>
+                    &emsp;&emsp;(a) taking in the string S[i..j] and the current index (as center) as parameters <br>
+                    &emsp;&emsp;&emsp;&emsp;(i) case 1: if the string length is odd, the method takes in i as the center <br>
+                    &emsp;&emsp;&emsp;&emsp;(ii) case 2: if the string length is even, the method takes in i and i+1 as the center <br>
+                    &emsp;&emsp;(b) this method compares the left and right characters of the given center if they are equal the same way as checking for palindrome <br>
+                    &emsp;&emsp;(c) it loops until the left index is less than 0 and the right is greater than the string length <br>
+                    &emsp;&emsp;(d) this method checks the the longest palindrome found by expanding from center to left and right and returns the length <br>
+                    (3) we then find the max length between the two cases of the looping method
+                    (4) with the max length, we update the starting and ending indeces of the longest palindrome found for every traversal of the given string <br><br>
+
+                    <b>Time and Space Complexity</b> <br>
+                    The time complexity is at <b>O(n^2)</b> since the traversal of the whole string runs at O(n) and for every traversal, we use the looping method which runs at O(n), too. Thus, making O(n) * O(n) = O(n^2). <br>
+                    The space complexity, on the other hand, is at <b>O(1)</b> since the character comparisons and the length register of the longest palindrome only take up a constant space. <br><br>
+                    
+                </p>
             </div>
         </div>
     </div>
