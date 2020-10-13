@@ -70,25 +70,26 @@
                 this.isOutput = true;
                 str = str.toLowerCase(); // make sure that characters are all in lower case
                 str = str.replace(' ', ''); // removes whitespaces, if any
-
+                let len = str.length;
+                
                 /*
                     Bruteforce implementation of determining whether a non-empty string is palindrome or not.
                     > iterates through the string characters
                     > compares end-to-end characters if equal until it reaches the middle index
                     > if all equal, then it's a plindrome; otherwise, it's not
                 */
-                if (str.length > 0) {
-                    let midLen = Math.floor(str.length / 2)
+                if (len > 0 && str.match('^[a-zA-Z]*$')) {
+                    let midLen = Math.floor(len / 2)
                     for (let i = 0; i < midLen; i++) {
-                        if (str[i] !== str[str.length - i - 1]) {
-                            this.output = false
-                            return
+                        if (str[i] !== str[len - i - 1]) {
+                            this.output = false;
+                            return;
                         }
                     }
                     this.output = true
                 }
-                else {
-                    this.output = 'Invalid string'
+                else {;
+                    this.output = 'Invalid string input'
                 }
             },
 

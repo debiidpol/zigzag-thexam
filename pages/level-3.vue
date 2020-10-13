@@ -88,55 +88,60 @@
                 str = str.replace(' ', ''); // removes whitespaces, if any
                 let len = str.length;
 
-                // initialize 2d array to hold boolean values if substrings are palindrome
-                let pArray = new Array(len);
-                for (let i = 0; i < len; i++) {
-                    pArray[i] = new Array(len);
-                }
-
-                // strings of length 1 are always palindromes
-                for (let i = 0; i < len; i++) {
-                    pArray[i][i] = true;
-                }
-
-                // checking if strings of length 2 are palindromes
-                for (let i = 0; i < len-1; i++) {
-                    if (str.charAt(i) == str.charAt(i+1)) {
-                        pArray[i][i+1] = true;
+                if (len > 0  && str.match('^[a-zA-Z]*$')) {
+                    // initialize 2d array to hold boolean values if substrings are palindrome
+                    let pArray = new Array(len);
+                    for (let i = 0; i < len; i++) {
+                        pArray[i] = new Array(len);
                     }
-                }
 
-                //identifying if strings of length >= 3 are palindromes
-                for (let i = 3; i <= len; i++) {
-                    for (let j = 0; j < (len - i + 1); j++) { // traversing by length
-                        let k = j+i-1;
-                        // check end-to-end characters if equal and then check from the lookup table whether the middle substring is palindrome
-                        if (str.charAt(j) == str.charAt(k) && pArray[j+1][k-1]) {
-                            pArray[j][k] = true;
+                    // strings of length 1 are always palindromes
+                    for (let i = 0; i < len; i++) {
+                        pArray[i][i] = true;
+                    }
+
+                    // checking if strings of length 2 are palindromes
+                    for (let i = 0; i < len-1; i++) {
+                        if (str.charAt(i) == str.charAt(i+1)) {
+                            pArray[i][i+1] = true;
                         }
                     }
-                }
 
-                // array to hold minimum cuts for length substrings
-                let pCuts = new Array(len);
-                for (let i = 0; i < len; i++) {
-                    let maxCut = 99999; // sets holder of max value to determine the current min value
-
-                    if (pArray[0][i]) { // if the current substring is already palindrome, then there's no need to cut it
-                        pCuts[i] = 0;
-                    }
-                    else {
-                        for (let j = 0; j < i; j++) {
-                            // checks whether the right substring from the cut is a palindrome and if the current max value still has the greater value
-                            if (pArray[j+1][i] && maxCut > pCuts[j] + 1) {
-                                maxCut = pCuts[j] + 1
+                    //identifying if strings of length >= 3 are palindromes
+                    for (let i = 3; i <= len; i++) {
+                        for (let j = 0; j < (len - i + 1); j++) { // traversing by length
+                            let k = j+i-1;
+                            // check end-to-end characters if equal and then check from the lookup table whether the middle substring is palindrome
+                            if (str.charAt(j) == str.charAt(k) && pArray[j+1][k-1]) {
+                                pArray[j][k] = true;
                             }
                         }
-                        pCuts[i] = maxCut;
                     }
-                }
 
-                this.output = pCuts[len-1]; // value at the end of the character string is the minimum number of cuts
+                    // array to hold minimum cuts for length substrings
+                    let pCuts = new Array(len);
+                    for (let i = 0; i < len; i++) {
+                        let maxCut = 99999; // sets holder of max value to determine the current min value
+
+                        if (pArray[0][i]) { // if the current substring is already palindrome, then there's no need to cut it
+                            pCuts[i] = 0;
+                        }
+                        else {
+                            for (let j = 0; j < i; j++) {
+                                // checks whether the right substring from the cut is a palindrome and if the current max value still has the greater value
+                                if (pArray[j+1][i] && maxCut > pCuts[j] + 1) {
+                                    maxCut = pCuts[j] + 1
+                                }
+                            }
+                            pCuts[i] = maxCut;
+                        }
+                    }
+
+                    this.output = pCuts[len-1]; // value at the end of the character string is the minimum number of cuts
+                }
+                else {
+                    this.output = 'invalid string input';
+                }
             },
 
             // function to trigger showing the documentation div; on and off

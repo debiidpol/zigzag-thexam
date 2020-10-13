@@ -85,7 +85,7 @@
                     > save the length of the longest palindrome substring as endIndex
                     > updates new start and end index depending on the longest palindrome substring founf
                 */
-                if (len > 0) {
+                if (len > 0  && str.match('^[a-zA-Z]*$')) {
                     let startIndex = 0;
                     let endIndex = 0;
 
@@ -96,13 +96,13 @@
 
                         if (longerLength > endIndex - startIndex) {
                             startIndex = i - Math.floor((longerLength-1)/2);
-                            endIndex = i + Math.floor(longerLength/2)
+                            endIndex = i + Math.floor(longerLength/2);
                         }
                     }
-                    this.output = str.substring(startIndex, endIndex+1)
+                    this.output = str.substring(startIndex, endIndex+1);
                 }
                 else {
-                    this.output = 'invalid input'
+                    this.output = 'invalid string input';
                 }
             },
 
